@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.young.coursera.city.mapper.CityMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.young.coursera.city.domain.City">
+        insert into `city` ( `name`, `state`, `country` ) values
+           (
+               #{name, jdbcType=VARCHAR},
+               #{state, jdbcType=VARCHAR},
+               #{country, jdbcType=VARCHAR}
+           )
+    </insert>
+</mapper>
