@@ -1,23 +1,16 @@
 package com.young.coursera.city.mapper;
 
-import com.young.coursera.city.domain.City;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-
+import com.young.coursera.city.model.City;
 import java.util.List;
 
-@Mapper
 public interface CityMapper {
+    int deleteById(Long id);
 
-    @Select("select id, name, state, country from city where state = #{state}")
-    City findByState(@Param("state") String state);
+    int insert(City row);
 
-    @Select("select * from city")
+    City selectById(Long id);
+
     List<City> selectAll();
 
-    @Select("select * from city")
-    List<City> selectForPage(@Param("page") int page, @Param("pageSize") int pageSize);
-
-    int insert(City city);
+    int update(City row);
 }

@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 
@@ -47,13 +44,9 @@ public class EntityInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        return Interceptor.super.plugin(target);
+        return Plugin.wrap(target, this);
     }
 
-    @Override
-    public void setProperties(Properties properties) {
-        Interceptor.super.setProperties(properties);
-    }
 
     protected void setFieldValByName(String fieldName, Object fieldVal, BaseEntity entity) {
         MetaObject metaObject = SystemMetaObject.forObject(entity);

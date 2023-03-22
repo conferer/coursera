@@ -1,12 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.young.coursera.city.mapper.CityMapper">
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.young.coursera.city.domain.City">
-        insert into `city` ( `name`, `state`, `country` ) values
-           (
-               #{name, jdbcType=VARCHAR},
-               #{state, jdbcType=VARCHAR},
-               #{country, jdbcType=VARCHAR}
-           )
-    </insert>
+  <resultMap id="BaseResultMap" type="com.young.coursera.city.model.City">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from city
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.young.coursera.city.model.City">
+    insert into city (id, name, state, 
+      country, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="update" parameterType="com.young.coursera.city.model.City">
+    update city
+    set name = #{name,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, state, country, create_time, update_time
+    from city
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, state, country, create_time, update_time
+    from city
+  </select>
 </mapper>

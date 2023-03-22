@@ -29,9 +29,11 @@ import java.util.regex.Matcher;
  * <p>
  * 因此拦截StatementHandler 肯定不会错误【StatementHandler，语句处理器负责和JDBC层具体交互，包括prepare语句，执行语句，以及调用ParameterHandler.parameterize()设置参数】
  */
-@Intercepts({@Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
+@Intercepts({
+        @Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
         @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
-        @Signature(type = StatementHandler.class, method = "batch", args = {Statement.class})})
+        @Signature(type = StatementHandler.class, method = "batch", args = {Statement.class})
+})
 @Slf4j
 public class SqlLogInterceptor implements Interceptor, Ordered {
 
