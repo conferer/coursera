@@ -23,3 +23,7 @@ pagehelper:
   support-methods-arguments: true
   params: pageNum=page;pageSize=pageSize;
 
+# swagger-ui custom path
+springdoc:
+  swagger-ui.path: /swagger-ui.html
+

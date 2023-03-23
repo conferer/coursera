@@ -2,6 +2,7 @@ package com.young.coursera.core.persist.mapper;
 
 import java.io.Serializable;
 
+@Deprecated
 public interface BaseMapper<PK, T extends Serializable> {
 
     /**

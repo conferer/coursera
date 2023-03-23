@@ -1,11 +1,11 @@
 # A free and open-source online learning platform
 
-## Introduction
+### Introduction
 
 This project aims to build a free and open-source learning platform from scratch,
 mainly to practice the best practices of MyBatis, and create a user-friendly and scalable system
 
-## Technology stack
+### Technology stack
 
 | name              | version |
 | ----------------- | ------- |
@@ -14,17 +14,59 @@ mainly to practice the best practices of MyBatis, and create a user-friendly and
 | Spring framework  | 6.0.6   |
 | Spring Security   | 6.0.2   |
 | MyBatis Framework | 3.5.11  |
+| Spring doc        | 2.0.4   |
 
+### Mybatis generator
 
-## Mybatis generator 
-
- generator mbg mysql account 
+1.  generator mbg mysql account
 
 ```mysql
 CREATE USER 'coursera'@'localhost' IDENTIFIED BY 'coursera';
 GRANT ALL PRIVILEGES ON coursera. * TO 'coursera'@'localhost';
-
 ```
+
+2. update config
+
+`src/test/resources/generator.properties`
+
+- support jdbc connection
+- support update `sql-map`、 `java-model`, `java-mapper`
+- support module base construct like `com.young.placeholder.entity` and `com.young.placeholder.mapper`
+
+3. support rewrite introspectedTable config
+
+default rewrite rule:
+
+- pre selectByPrimaryKey -> selectById $~~~~~~~~~~~$// Replace `selectByPrimaryKey()` with selectById() in xxxMapper.java
+- deleteByPrimaryKey -> deleteById $~~~~~~~~~~~$// Replace `deleteByPrimaryKey()` with deleteById() in xxxMapper.java
+- updateByPrimaryKey -> update $~~~~~~~~~~~$// Replace `updateByPrimaryKey()` with update() in xxxMapper.java
+
+### Best practices for infrastructure based on numerous projects.
+
+1. `com.young.coursera.core.lang` contains lots of basics infrastructure like
+
+- Query $~~~~~~~~~~~$// List query obj support multi `order fields`
+- PageQuery $~~~~~~~~~~~$// Page List query obj support `pageNo` and `pageSize`
+- BaseEntity $~~~~~~~~~~~$// BaseEntity contains `id` and `create_time` and `update_time` , all of your tables recommended to have these fields
+- Page $~~~~~~~~~~~$// Page wrapper obj that pagination info
+- Result $~~~~~~~~~~~$ //Result wrapper obj contains response `code` and response `msg`
+- Err $~~~~~~~~~~~$ // common error interface
+
+2. `com.young.coursera.core.exception` Provided an out-of-the-box exception framework.
+
+ServiceException support using `Err` provide error business message, also you can using `Object[] args` provide external msg
+
+- ServiceException(Err err)
+- ServiceException(String msg)
+- ServiceException(String)
+
+By using `Asserts` enable you simplify using `ServiceException`
+
+```java
+//throw new ServiceException(CommonError.NOT_FOUND) if city is null
+Asserts.notNull(city, CommonError.NOT_FOUND);
+```
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:

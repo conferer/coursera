@@ -1,16 +1,16 @@
 package com.young.coursera.city.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.young.coursera.core.lang.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
-@Schema(description="替换区")
+@Schema(description="city")
 @NoArgsConstructor
-public class City implements Serializable {
+public class City extends BaseEntity {
     private Long id;
 
     private String name;

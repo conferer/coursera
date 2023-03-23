@@ -1,6 +1,6 @@
 package com.young.coursera.core.mybatis.plugin;
 
-import com.young.coursera.core.persist.entity.BaseEntity;
+import com.young.coursera.core.lang.BaseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -11,7 +11,6 @@ import org.apache.ibatis.reflection.SystemMetaObject;
 
 import java.time.Instant;
 import java.util.Objects;
-import java.util.Properties;
 
 @Slf4j
 @Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
