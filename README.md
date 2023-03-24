@@ -73,17 +73,23 @@ Asserts.notNull(city, CommonError.NOT_FOUND);
 
 #### db
 
-- course
-- course_lesson
+1. course
 
-- lesson_media
-- course_member
-- course_note
-- course_comment
-- course_favorite
+- [ ] course
+- [ ] course_lesson
+- [ ] course_member
+- [ ] course_note
+- [ ] course_comment
+- [ ] course_favorite
 
-- user
-- user_role
+2. lesson
+
+- [ ] lesson_media
+
+3. user
+
+- [ ] user
+- [ ] user_role
 
 ### Reference Documentation
 
