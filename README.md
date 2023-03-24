@@ -37,20 +37,24 @@ GRANT ALL PRIVILEGES ON coursera. * TO 'coursera'@'localhost';
 
 default rewrite rule:
 
-- pre selectByPrimaryKey -> selectById $~~~~~~~~~~~$// Replace `selectByPrimaryKey()` with selectById() in xxxMapper.java
-- deleteByPrimaryKey -> deleteById $~~~~~~~~~~~$// Replace `deleteByPrimaryKey()` with deleteById() in xxxMapper.java
-- updateByPrimaryKey -> update $~~~~~~~~~~~$// Replace `updateByPrimaryKey()` with update() in xxxMapper.java
+| before             | --> | now        | description                                                        |
+| ------------------ | --- | ---------- | ------------------------------------------------------------------ |
+| selectByPrimaryKey | --> | selectById | Replace `selectByPrimaryKey()` with selectById() in xxxMapper.java |
+| deleteByPrimaryKey | --> | deleteById | Replace `deleteByPrimaryKey()` with deleteById() in xxxMapper.java |
+| updateByPrimaryKey | --> | update     | Replace `updateByPrimaryKey()` with update() in xxxMapper.java     |
 
 ### Best practices for infrastructure based on numerous projects.
 
 1. `com.young.coursera.core.lang` contains lots of basics infrastructure like
 
-- Query $~~~~~~~~~~~$// List query obj support multi `order fields`
-- PageQuery $~~~~~~~~~~~$// Page List query obj support `pageNo` and `pageSize`
-- BaseEntity $~~~~~~~~~~~$// BaseEntity contains `id` and `create_time` and `update_time` , all of your tables recommended to have these fields
-- Page $~~~~~~~~~~~$// Page wrapper obj that pagination info
-- Result $~~~~~~~~~~~$ //Result wrapper obj contains response `code` and response `msg`
-- Err $~~~~~~~~~~~$ // common error interface
+| module     | description                                                                                                        |
+| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| Query      | List query obj support multi `order fields`                                                                        |
+| PageQuery  | Page List query obj support `pageNo` and `pageSize`                                                                |
+| BaseEntity | BaseEntity contains `id` and `create_time` and `update_time` , all of your tables recommended to have these fields |
+| Page       | Page wrapper obj that pagination info                                                                              |
+| Result     | Result wrapper obj contains response `code` and response `msg`                                                     |
+| Err        | common error interface                                                                                             |
 
 2. `com.young.coursera.core.exception` Provided an out-of-the-box exception framework.
 
@@ -67,7 +71,6 @@ By using `Asserts` enable you simplify using `ServiceException`
 Asserts.notNull(city, CommonError.NOT_FOUND);
 ```
 
-
 #### db
 
 - course
@@ -81,8 +84,6 @@ Asserts.notNull(city, CommonError.NOT_FOUND);
 
 - user
 - user_role
-
-
 
 ### Reference Documentation
 
