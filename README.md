@@ -37,11 +37,11 @@ GRANT ALL PRIVILEGES ON coursera. * TO 'coursera'@'localhost';
 
 default rewrite rule:
 
-| before             | --> | now        | description                                                        |
-| ------------------ | --- | ---------- | ------------------------------------------------------------------ |
-| selectByPrimaryKey | --> | selectById | Replace `selectByPrimaryKey()` with selectById() in xxxMapper.java |
-| deleteByPrimaryKey | --> | deleteById | Replace `deleteByPrimaryKey()` with deleteById() in xxxMapper.java |
-| updateByPrimaryKey | --> | update     | Replace `updateByPrimaryKey()` with update() in xxxMapper.java     |
+| default name       | configured name | description                                                        |
+| ------------------ | --------------- | ------------------------------------------------------------------ |
+| selectByPrimaryKey | selectById      | Replace `selectByPrimaryKey()` with selectById() in xxxMapper.java |
+| deleteByPrimaryKey | deleteById      | Replace `deleteByPrimaryKey()` with deleteById() in xxxMapper.java |
+| updateByPrimaryKey | update          | Replace `updateByPrimaryKey()` with update() in xxxMapper.java     |
 
 ### Best practices for infrastructure based on numerous projects.
 
