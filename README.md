@@ -67,6 +67,23 @@ By using `Asserts` enable you simplify using `ServiceException`
 Asserts.notNull(city, CommonError.NOT_FOUND);
 ```
 
+
+#### db
+
+- course
+- course_lesson
+
+- lesson_media
+- course_member
+- course_note
+- course_comment
+- course_favorite
+
+- user
+- user_role
+
+
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
