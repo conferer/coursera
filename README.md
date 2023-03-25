@@ -71,6 +71,48 @@ By using `Asserts` enable you simplify using `ServiceException`
 Asserts.notNull(city, CommonError.NOT_FOUND);
 ```
 
+### Service/Mapper 层方法命名规约
+
+在方法命名中，一般使用动词+名词的方式来描述该方法的作用。同时，在方法命名时，也要注意以下几点：
+
+名称要简单易懂，能够直接表达出方法的作用。
+尽量使用常见的单词和表达方式，方便其他开发人员理解。
+遵循团队或公司内部的规范，保证代码风格的统一性。
+
+参考 Spring data Jpa规范，通用接口设计如下
+
+1. 新增修改
+
+- insert(Entity entity) 
+- update(Entity entity)
+---
+
+2. 查询单个对象
+
+- findById(Long id)
+
+---
+3. 查询多个对象
+
+- findAll(Query query)
+- findAll(PageQuery query)
+- findAllById(List<Long> ids)
+- count(Query query)
+
+---
+4. 删除
+
+- delete(Entity entity)
+- deleteById(Long id)
+- deleteAll()
+- deleteAllById(List<Long> ids)
+
+---
+5. 发布单个对象
+
+- publish(Long id, Boolean flag)
+
+
 #### db
 
 1. course
