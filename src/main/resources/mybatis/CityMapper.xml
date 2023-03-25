@@ -38,5 +38,11 @@
   <select id="findAll" resultMap="BaseResultMap">
     select id, name, state, country, create_time, update_time
     from city
+    <if test="orderBy != null">
+      order by
+      <foreach collection="orderBy" separator="," item="item">
+        ${item}
+      </foreach>
+    </if>
   </select>
 </mapper>

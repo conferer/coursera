@@ -4,12 +4,12 @@ import com.young.coursera.city.mapper.CityMapper;
 import com.young.coursera.city.model.City;
 import com.young.coursera.core.lang.PageQuery;
 import com.young.coursera.core.lang.Query;
-import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Server
+@Service
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 

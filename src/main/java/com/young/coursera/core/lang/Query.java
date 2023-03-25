@@ -9,7 +9,7 @@ public class Query implements Serializable {
 
     /**
      * 排序字段
-     * example: ['id desc', 'name asc']
+     * example:  ["id asc", "name asc"]
      */
     private String[] orderBy;
 

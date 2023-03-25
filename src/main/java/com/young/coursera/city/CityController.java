@@ -37,16 +37,18 @@ public class CityController {
     }
 
     @GetMapping("/search")
-    public PageInfo search(Query query) {
-        PageHelper.startPage(1, 20);
+    public List<City> search(@RequestBody Query query) {
+        //可以设置默认的返回条数
+        PageHelper.startPage(1, 10);
+        
         List<City> cities = cityService.list(query);
-        PageInfo page = new PageInfo(cities);
-        log.info("Total:{} ", page.getPageNum());
-        return page;
+        log.info("Total:{} ", cities.size());
+        return cities;
     }
 
     @GetMapping("/page")
-    public PageInfo page(PageQuery pageQuery) {
+    public PageInfo page(@RequestBody PageQuery pageQuery) {
+        //PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
         List<City> cities = cityService.listForPage(pageQuery);
         PageInfo result = new PageInfo(cities);
         log.info("Total:{} ", result.getPageNum());

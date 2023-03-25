@@ -1,9 +1,13 @@
 package com.young.coursera.core.lang;
 
+import java.io.Serial;
+
 /**
  * 分页查询过滤器
  */
 public class PageQuery extends Query {
+    @Serial
+    private static final long serialVersionUID = -1897118078758531718L;
     /**
      * 页数
      */
@@ -17,18 +21,6 @@ public class PageQuery extends Query {
      * 计算总数， 默认总是计算，除非设置为 false
      */
     private Boolean countTotal = true;
-
-
-    public PageQuery(Integer page, Integer pageSize) {
-        this.page = page;
-        this.pageSize = pageSize;
-    }
-
-    public PageQuery(Integer page, Integer pageSize, Boolean countTotal) {
-        this.page = page;
-        this.pageSize = pageSize;
-        this.countTotal = countTotal;
-    }
 
     public Integer getPage() {
         return page;
