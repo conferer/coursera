@@ -2,10 +2,12 @@ package com.young.coursera.city;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.young.coursera.city.mapper.CityMapper;
 import com.young.coursera.city.model.City;
+import com.young.coursera.city.service.CityService;
 import com.young.coursera.core.exception.enums.CommonError;
 import com.young.coursera.core.exception.util.Asserts;
+import com.young.coursera.core.lang.PageQuery;
+import com.young.coursera.core.lang.Query;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,28 +26,28 @@ import java.util.List;
 @Tag(name = "城市API", description = "可以控制城市的增删改查")
 public class CityController {
 
-    private final CityMapper cityMapper;
+    private final CityService cityService;
 
     @GetMapping
     public City getCity(String state) {
-        City city = cityMapper.findByState(state);
+        City city = cityService.findByState(state);
         //展示如何使用 Exception helper 简化异常
         Asserts.notNull(city, CommonError.NOT_FOUND);
         return city;
     }
 
     @GetMapping("/search")
-    public PageInfo search() {
+    public PageInfo search(Query query) {
         PageHelper.startPage(1, 20);
-        List<City> cities = cityMapper.selectAll();
+        List<City> cities = cityService.list(query);
         PageInfo page = new PageInfo(cities);
         log.info("Total:{} ", page.getPageNum());
         return page;
     }
 
     @GetMapping("/page")
-    public PageInfo page(int page, int pageSize) {
-        List<City> cities = cityMapper.selectAll(page, pageSize);
+    public PageInfo page(PageQuery pageQuery) {
+        List<City> cities = cityService.listForPage(pageQuery);
         PageInfo result = new PageInfo(cities);
         log.info("Total:{} ", result.getPageNum());
         return result;
@@ -55,8 +57,8 @@ public class CityController {
     @Operation(summary = "Create city", description = "只能登录用调用此API")
     @Parameter(name = "city", description = "city object to be saved")
     public City create(@RequestBody City city) {
-        cityMapper.insert(city);
-        return cityMapper.findByState(city.getState());
+        cityService.create(city);
+        return cityService.findByState(city.getState());
     }
 
 }

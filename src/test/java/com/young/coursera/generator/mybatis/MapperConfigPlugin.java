@@ -21,14 +21,14 @@ public class MapperConfigPlugin extends PluginAdapter {
 
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        introspectedTable.setSelectByPrimaryKeyStatementId("selectById");// 详情接口方法名
+        introspectedTable.setSelectAllStatementId("findAll"); // 查找所有接口方法名
+        introspectedTable.setSelectByPrimaryKeyStatementId("findById");// 详情接口方法名
         introspectedTable.setDeleteByPrimaryKeyStatementId("deleteById");// 删除接口方法名
         introspectedTable.setUpdateByPrimaryKeyStatementId("update");// 更新接口方法名
 
         topLevelClass.addImportedType("lombok.Data");// lombok
         topLevelClass.addImportedType("lombok.NoArgsConstructor");// lombok
         topLevelClass.addImportedType("io.swagger.v3.oas.annotations.media.Schema");// swagger
-
         topLevelClass.addAnnotation("@Data");// lombok
         topLevelClass.addAnnotation("@Schema(description=\"" + topLevelClass.getType().getShortName().toLowerCase() + "\")");// lombok'
 

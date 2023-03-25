@@ -18,9 +18,7 @@ public interface BaseService<T extends BaseEntity, Q extends Query, P extends Pa
 
     List<T> list(Q query);
 
-    List<T> listForPage(T query);
+    List<T> listForPage(P query);
 
-    default T publish(Long id, Boolean flag) {
-        return null;
-    }
+    T publish(Long id, Boolean flag);
 }
