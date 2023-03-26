@@ -6,7 +6,7 @@ import com.young.coursera.core.lang.Query;
 
 import java.util.List;
 
-public interface BaseService<T extends BaseEntity, Q extends Query, P extends PageQuery> {
+public interface BaseService<T extends BaseEntity> {
 
     T create(T entity);
 
@@ -16,9 +16,9 @@ public interface BaseService<T extends BaseEntity, Q extends Query, P extends Pa
 
     void delete(Long id);
 
-    List<T> list(Q query);
+    List<T> list(Query query);
 
-    List<T> listForPage(P query);
+    List<T> listForPage(PageQuery query);
 
     T publish(Long id, Boolean flag);
 }

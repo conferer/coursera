@@ -3,6 +3,7 @@ package com.young.coursera.city;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.young.coursera.city.model.City;
+import com.young.coursera.city.model.CityPageQuery;
 import com.young.coursera.city.service.CityService;
 import com.young.coursera.core.exception.enums.CommonError;
 import com.young.coursera.core.exception.util.Asserts;
@@ -31,24 +32,24 @@ public class CityController {
     @GetMapping
     public City getCity(String state) {
         City city = cityService.findByState(state);
-        //展示如何使用 Exception helper 简化异常
+        // 展示如何使用 Exception helper 简化异常
         Asserts.notNull(city, CommonError.NOT_FOUND);
         return city;
     }
 
     @GetMapping("/search")
     public List<City> search(@RequestBody Query query) {
-        //可以设置默认的返回条数
+        // 可以设置默认的返回条数
         PageHelper.startPage(1, 10);
-        
+
         List<City> cities = cityService.list(query);
         log.info("Total:{} ", cities.size());
         return cities;
     }
 
     @GetMapping("/page")
-    public PageInfo page(@RequestBody PageQuery pageQuery) {
-        //PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+    public PageInfo page(@RequestBody CityPageQuery pageQuery) {
+        // PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
         List<City> cities = cityService.listForPage(pageQuery);
         PageInfo result = new PageInfo(cities);
         log.info("Total:{} ", result.getPageNum());
