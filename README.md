@@ -79,12 +79,23 @@ Asserts.notNull(city, CommonError.NOT_FOUND);
 尽量使用常见的单词和表达方式，方便其他开发人员理解。
 遵循团队或公司内部的规范，保证代码风格的统一性。
 
-参考 Spring data Jpa规范，通用接口设计如下
+参考 Spring data Jpa 规范，通用接口设计如下
+
+```shell
+insert
+update
+findById
+findList / findAll
+findPage / findAllForPage
+```
 
 1. 新增修改
 
-- insert(Entity entity) 
+- insert(Entity entity)
 - update(Entity entity)
+- batchInsert(List<Entity> entities)
+- batchUpdate(List<Entity> entities)
+
 ---
 
 2. 查询单个对象
@@ -92,6 +103,7 @@ Asserts.notNull(city, CommonError.NOT_FOUND);
 - findById(Long id)
 
 ---
+
 3. 查询多个对象
 
 - findAll(Query query)
@@ -100,6 +112,7 @@ Asserts.notNull(city, CommonError.NOT_FOUND);
 - count(Query query)
 
 ---
+
 4. 删除
 
 - delete(Entity entity)
@@ -108,10 +121,16 @@ Asserts.notNull(city, CommonError.NOT_FOUND);
 - deleteAllById(List<Long> ids)
 
 ---
+
 5. 发布单个对象
 
 - publish(Long id, Boolean flag)
 
+---
+
+- checkUserName(Long id, String name)
+- enableUser(Long id)
+- disableUser(Long id)
 
 #### db
 

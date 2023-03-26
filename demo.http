@@ -4,6 +4,7 @@ content-type: application/json
 {
   "page":1,
   "pageSize":10,
+  "state":"New York",
   "orderBy": ["id asc", "name asc"]
 }
 
