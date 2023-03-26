@@ -21,7 +21,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City create(City entity) {
+    public City insert(City entity) {
         cityMapper.insert(entity);
         return entity;
     }
@@ -33,7 +33,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City get(Long id) {
+    public City findById(Long id) {
         return cityMapper.findById(id);
     }
 
@@ -43,12 +43,12 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<City> list(Query query) {
+    public List<City> findAll(Query query) {
         return cityMapper.findAll(query);
     }
 
     @Override
-    public List<City> listForPage(PageQuery query) {
+    public List<City> findForPage(PageQuery query) {
         return cityMapper.findAll(query);
     }
 

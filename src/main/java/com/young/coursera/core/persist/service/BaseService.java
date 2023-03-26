@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface BaseService<T extends BaseEntity> {
 
-    T create(T entity);
+    T insert(T entity);
 
     T update(Long id, T entity);
 
-    T get(Long id);
+    T findById(Long id);
 
     void delete(Long id);
 
-    List<T> list(Query query);
+    List<T> findAll(Query query);
 
-    List<T> listForPage(PageQuery query);
+    List<T> findForPage(PageQuery query);
 
     T publish(Long id, Boolean flag);
 }

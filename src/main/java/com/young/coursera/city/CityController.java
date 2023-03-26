@@ -7,7 +7,6 @@ import com.young.coursera.city.model.CityPageQuery;
 import com.young.coursera.city.service.CityService;
 import com.young.coursera.core.exception.enums.CommonError;
 import com.young.coursera.core.exception.util.Asserts;
-import com.young.coursera.core.lang.PageQuery;
 import com.young.coursera.core.lang.Query;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -42,7 +41,7 @@ public class CityController {
         // 可以设置默认的返回条数
         PageHelper.startPage(1, 10);
 
-        List<City> cities = cityService.list(query);
+        List<City> cities = cityService.findAll(query);
         log.info("Total:{} ", cities.size());
         return cities;
     }
@@ -50,7 +49,7 @@ public class CityController {
     @GetMapping("/page")
     public PageInfo page(@RequestBody CityPageQuery pageQuery) {
         // PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
-        List<City> cities = cityService.listForPage(pageQuery);
+        List<City> cities = cityService.findForPage(pageQuery);
         PageInfo result = new PageInfo(cities);
         log.info("Total:{} ", result.getPageNum());
         return result;
@@ -60,7 +59,7 @@ public class CityController {
     @Operation(summary = "Create city", description = "只能登录用调用此API")
     @Parameter(name = "city", description = "city object to be saved")
     public City create(@RequestBody City city) {
-        cityService.create(city);
+        cityService.insert(city);
         return cityService.findByState(city.getState());
     }
 
