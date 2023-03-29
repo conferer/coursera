@@ -21,6 +21,6 @@ public interface CityMapper {
 
     int update(City row);
 
-    @Select("select * from `city` where state = ?")
+    @Select("select * from `city` where `state` = #{state}")
     City findByState(@Param("state") String state);
 }
