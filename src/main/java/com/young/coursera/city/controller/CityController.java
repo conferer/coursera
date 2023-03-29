@@ -1,9 +1,9 @@
-package com.young.coursera.city;
+package com.young.coursera.city.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.young.coursera.city.model.City;
-import com.young.coursera.city.model.CityPageQuery;
+import com.young.coursera.city.domain.model.City;
+import com.young.coursera.city.domain.query.CityPageQuery;
 import com.young.coursera.city.service.CityService;
 import com.young.coursera.core.exception.enums.CommonError;
 import com.young.coursera.core.exception.util.Asserts;

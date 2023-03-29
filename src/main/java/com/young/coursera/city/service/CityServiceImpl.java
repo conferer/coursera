@@ -1,7 +1,7 @@
 package com.young.coursera.city.service;
 
 import com.young.coursera.city.mapper.CityMapper;
-import com.young.coursera.city.model.City;
+import com.young.coursera.city.domain.model.City;
 import com.young.coursera.core.lang.PageQuery;
 import com.young.coursera.core.lang.Query;
 import lombok.RequiredArgsConstructor;

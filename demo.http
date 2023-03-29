@@ -1,3 +1,8 @@
+GET http://localhost:8090/cities?state=Washington2 HTTP/1.1
+content-type: application/json
+
+
+###
 GET http://localhost:8090/cities/page HTTP/1.1
 content-type: application/json
 
@@ -17,4 +22,15 @@ Content-Type:  application/json
   "page":1,
   "pageSize":10,
   "orderBy": ["id asc", "name asc"]
+}
+
+### 
+
+POST http://localhost:8090/cities HTTP/1.1
+Content-Type: application/json
+
+{
+  "name":"Indianapolis",
+  "state":"Washington",
+  "country":"USA"
 }

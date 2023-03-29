@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
        Copyright 2015-2022 the original author or authors.
        Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,16 +11,15 @@
        See the License for the specific language governing permissions and
        limitations under the License.
 -->
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
     <plugins>
-        <plugin interceptor="com.young.coursera.core.mybatis.plugin.EntityInterceptor"/>
+        <plugin interceptor="com.young.coursera.core.mybatis.plugin.EntityAuditInterceptor"/>
         <plugin interceptor="com.young.coursera.core.mybatis.plugin.SqlLogInterceptor"/>
     </plugins>
 </configuration>

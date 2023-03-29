@@ -8,7 +8,7 @@ mainly to practice the best practices of MyBatis, and create a user-friendly and
 ### Technology stack
 
 | name              | version |
-| ----------------- | ------- |
+|-------------------|---------|
 | jdk               | 17      |
 | Spring boot       | 3.0.4   |
 | Spring framework  | 6.0.6   |
@@ -18,7 +18,7 @@ mainly to practice the best practices of MyBatis, and create a user-friendly and
 
 ### Mybatis generator
 
-1.  generator mbg mysql account
+1. generator mbg mysql account
 
 ```mysql
 CREATE USER 'coursera'@'localhost' IDENTIFIED BY 'coursera';
@@ -38,7 +38,7 @@ GRANT ALL PRIVILEGES ON coursera. * TO 'coursera'@'localhost';
 default rewrite rule:
 
 | default name       | configured name | description                                                        |
-| ------------------ | --------------- | ------------------------------------------------------------------ |
+|--------------------|-----------------|--------------------------------------------------------------------|
 | selectByPrimaryKey | selectById      | Replace `selectByPrimaryKey()` with selectById() in xxxMapper.java |
 | deleteByPrimaryKey | deleteById      | Replace `deleteByPrimaryKey()` with deleteById() in xxxMapper.java |
 | updateByPrimaryKey | update          | Replace `updateByPrimaryKey()` with update() in xxxMapper.java     |
@@ -48,7 +48,7 @@ default rewrite rule:
 1. `com.young.coursera.core.lang` contains lots of basics infrastructure like
 
 | module     | description                                                                                                        |
-| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+|------------|--------------------------------------------------------------------------------------------------------------------|
 | Query      | List query obj support multi `order fields`                                                                        |
 | PageQuery  | Page List query obj support `pageNo` and `pageSize`                                                                |
 | BaseEntity | BaseEntity contains `id` and `create_time` and `update_time` , all of your tables recommended to have these fields |
@@ -68,7 +68,7 @@ By using `Asserts` enable you simplify using `ServiceException`
 
 ```java
 //throw new ServiceException(CommonError.NOT_FOUND) if city is null
-Asserts.notNull(city, CommonError.NOT_FOUND);
+Asserts.notNull(city,CommonError.NOT_FOUND);
 ```
 
 ### Service/Mapper 层方法命名规约
@@ -107,7 +107,7 @@ findPage / findAllForPage
 3. 查询多个对象
 
 - findAll(Query query)
-- findAll(PageQuery query)
+- findAll(PageQuery query) / pageAll(PageQuery query)
 - findAllById(List<Long> ids)
 - count(Query query)
 
@@ -131,6 +131,7 @@ findPage / findAllForPage
 - checkUserName(Long id, String name)
 - enableUser(Long id)
 - disableUser(Long id)
+- existById(Long id)
 
 #### db
 

@@ -85,16 +85,6 @@ public class SqlLogInterceptor implements Interceptor, Ordered {
         return "";
     }
 
-    @Override
-    public Object plugin(Object target) {
-        return Plugin.wrap(target, this);
-    }
-
-    @Override
-    public void setProperties(Properties properties) {
-
-    }
-
     /**
      * 获取完整的sql实体的信息
      *

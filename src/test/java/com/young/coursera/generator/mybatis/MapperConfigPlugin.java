@@ -1,5 +1,6 @@
 package com.young.coursera.generator.mybatis;
 
+import org.apache.ibatis.io.Resources;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -8,11 +9,17 @@ import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 public class MapperConfigPlugin extends PluginAdapter {
+    public static final Logger log = LoggerFactory.getLogger(MapperConfigPlugin.class);
 
     @Override
     public boolean validate(List<String> warnings) {
@@ -29,10 +36,13 @@ public class MapperConfigPlugin extends PluginAdapter {
         topLevelClass.addImportedType("lombok.Data");// lombok
         topLevelClass.addImportedType("lombok.NoArgsConstructor");// lombok
         topLevelClass.addImportedType("io.swagger.v3.oas.annotations.media.Schema");// swagger
+        topLevelClass.addImportedType(readProperty().getProperty("java-model.super.interface"));// entity interface
         topLevelClass.addAnnotation("@Data");// lombok
-        topLevelClass.addAnnotation("@Schema(description=\"" + topLevelClass.getType().getShortName().toLowerCase() + "\")");// lombok'
-
+        topLevelClass.addAnnotation("@Schema(description=\"" + topLevelClass.getType().getShortName().toLowerCase() + "\")");// lombok
         topLevelClass.addAnnotation("@NoArgsConstructor");// lombok
+
+        topLevelClass.addSuperInterface(new FullyQualifiedJavaType("Entity"));
+
         List<IntrospectedColumn> allColumns = introspectedTable.getAllColumns();
         for (IntrospectedColumn column : allColumns) {
             if (column.getJdbcTypeName().equals("TIMESTAMP")) {
@@ -70,5 +80,22 @@ public class MapperConfigPlugin extends PluginAdapter {
     @Override
     public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
         return true;
+    }
+
+    /**
+     * read generator.properties
+     *
+     * @return Properties
+     */
+    private static Properties readProperty() {
+        Properties prop = new Properties();
+        try {
+            InputStream inputStream = Resources.getResourceAsStream("generator.properties");
+            prop.load(inputStream);
+            return prop;
+        } catch (IOException e) {
+            log.info("Error when read properties: {}", e.getMessage(), e);
+            return prop;
+        }
     }
 }
