@@ -1,4 +1,4 @@
-package com.young.coursera.city.domain.query;
+package com.young.coursera.city.domain.dto;
 
 import com.young.coursera.core.lang.PageQuery;
 import lombok.Getter;

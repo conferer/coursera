@@ -2,6 +2,8 @@ package com.young.coursera.city.service;
 
 import com.young.coursera.city.mapper.CityMapper;
 import com.young.coursera.city.domain.model.City;
+import com.young.coursera.core.exception.enums.CommonError;
+import com.young.coursera.core.exception.util.Asserts;
 import com.young.coursera.core.lang.PageQuery;
 import com.young.coursera.core.lang.Query;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,10 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City findByState(String state) {
-        return cityMapper.findByState(state);
+        City city = cityMapper.findByState(state);
+        // 展示如何使用 Exception helper 简化异常
+        Asserts.notNull(city, CommonError.NOT_FOUND);
+        return city;
     }
 
     @Override
@@ -28,13 +33,17 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City update(Long id, City entity) {
+        City existedCity = findById(id);
         cityMapper.update(entity);
         return entity;
     }
 
     @Override
     public City findById(Long id) {
-        return cityMapper.findById(id);
+        City city = cityMapper.findById(id);
+        // 展示如何使用 Exception helper 简化异常
+        Asserts.notNull(city, CommonError.NOT_FOUND);
+        return city;
     }
 
     @Override

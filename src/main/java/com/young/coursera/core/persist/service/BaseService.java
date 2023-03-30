@@ -19,9 +19,9 @@ public interface BaseService<T extends Entity> {
 
     T update(Long id, T entity);
 
-    T findById(Long id);
-
     void delete(Long id);
+
+    T findById(Long id);
 
     /**
      * 这个方法如果使用 pageHelper,name 可以通过入参控制，是否分页，因此 findForPage() 方法在某种意义上是没有必要存在
