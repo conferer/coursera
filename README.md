@@ -137,7 +137,19 @@ findPage / findAllForPage
 
 1. course
 
-- [ ] course
+- [ ] course  
+  - [ ] create 后台-创建
+  - [ ] update 后台-更新
+  - [ ] delete 后台-删除
+  - [ ] get 后台-查询
+  - [ ] getByUid 前台-查询
+  - [ ] findAll 后台-查询
+  - [ ] search 前台-查询
+  - [ ] publish 后台-发布
+  - [ ] undoPublish 后台-取消发布
+  - [ ] recommend 后台-推荐
+  - [ ] undoRecommend 后台-取消推荐
+  - [ ] close 后台-关闭课程
 - [ ] course_lesson
 - [ ] course_member
 - [ ] course_note
