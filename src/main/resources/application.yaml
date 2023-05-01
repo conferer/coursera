@@ -7,18 +7,21 @@ spring:
     out-of-order: true
     validate-on-migrate: false
     locations: classpath:/migrations
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      timeout: 2m
 mybatis:
   config-location: classpath:mybatis/config/mybatis-config.xml
   mapper-locations: classpath:mybatis/*.xml
-  print: true
 
 logging:
   level:
     web: trace
     sql: trace
-    org.mybatis: trace
-    org.apache.ibatis: trace
-    com.young.coursera.com.young.coursera.city.mapper: trace
+    com.young.coursera: trace
 pagehelper:
   support-methods-arguments: true
   params: pageNum=page;pageSize=pageSize;
@@ -26,7 +29,6 @@ pagehelper:
 # swagger-ui custom path
 springdoc:
   swagger-ui.path: /swagger-ui.html
-
 
 server:
   port: 8090

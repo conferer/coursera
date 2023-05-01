@@ -8,7 +8,8 @@ import java.util.List;
  *
  * @param <T> BaseEntity
  */
-public class Page<T extends BaseEntity> implements Serializable {
+@SuppressWarnings("serial")
+public class Page<T extends Entity> implements Serializable {
     /**
      * 页数
      */
