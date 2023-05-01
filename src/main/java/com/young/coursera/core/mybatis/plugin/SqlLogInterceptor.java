@@ -86,21 +86,17 @@ public class SqlLogInterceptor implements Interceptor, Ordered {
     }
 
     /**
-     * 获取完整的sql实体的信息
-     *
-     * @param boundSql
-     * @return
+     *  获取完整的sql实体的信息
+     * @param boundSql sql
+     * @param configuration config
+     * @return formatted sql
      */
     private String formatSql(BoundSql boundSql, Configuration configuration) {
         String sql = boundSql.getSql();
         List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
         Object parameterObject = boundSql.getParameterObject();
         // 输入sql字符串空判断
-        if (sql == null || sql.length() == 0) {
-            return "";
-        }
-
-        if (configuration == null) {
+        if (sql == null || sql.length() == 0 || configuration == null) {
             return "";
         }
 
@@ -146,6 +142,7 @@ public class SqlLogInterceptor implements Interceptor, Ordered {
         }
         return sql;
     }
+
 
     /**
      * 美化Sql

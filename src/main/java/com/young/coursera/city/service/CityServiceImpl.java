@@ -57,7 +57,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<City> findForPage(PageQuery query) {
+    public List<City> findPage(PageQuery query) {
         return cityMapper.findAll(query);
     }
 

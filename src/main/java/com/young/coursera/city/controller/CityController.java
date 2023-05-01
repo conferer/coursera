@@ -4,11 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.young.coursera.city.convert.CityConvert;
 import com.young.coursera.city.domain.dto.CityDto;
-import com.young.coursera.city.domain.model.City;
 import com.young.coursera.city.domain.dto.CityPageQuery;
+import com.young.coursera.city.domain.model.City;
 import com.young.coursera.city.service.CityService;
-import com.young.coursera.core.exception.enums.CommonError;
-import com.young.coursera.core.exception.util.Asserts;
 import com.young.coursera.core.lang.Query;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -79,7 +77,7 @@ public class CityController {
     @GetMapping("/search")
     public List<CityDto> search(@RequestBody Query query) {
         // 可以设置默认的返回条数,不查询分页总数
-        PageHelper.startPage(1, 10, false);
+        PageHelper.startPage(1, 20, false);
 
         List<City> cities = cityService.findAll(query);
         log.info("Total:{} ", cities.size());
@@ -91,7 +89,10 @@ public class CityController {
     @GetMapping("/page")
     public PageInfo<CityDto> page(@RequestBody CityPageQuery pageQuery) {
         // PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
-        List<City> cities = cityService.findForPage(pageQuery);
+        List<City> cities = cityService.findPage(pageQuery);
+        //PageHelper.startPage(1, 10).doSelectPageInfo(() -> cityService.findForPage(pageQuery));
+        //total=
+        PageHelper.count(()->cityService.findPage(pageQuery));
         PageInfo<CityDto> result = new PageInfo<>(CityConvert.INSTANCE.citiesToCitiesDto(cities));
         log.info("Total:{} ", result.getPageNum());
         return result;

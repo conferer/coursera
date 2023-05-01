@@ -4,7 +4,6 @@ import com.young.coursera.city.domain.dto.CityDto;
 import com.young.coursera.city.domain.model.City;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

@@ -31,7 +31,7 @@ public interface BaseService<T extends Entity> {
      */
     List<T> findAll(Query query);
 
-    List<T> findForPage(PageQuery query);
+    List<T> findPage(PageQuery query);
 
     T publish(Long id, Boolean flag);
 }
