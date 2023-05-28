@@ -20,6 +20,6 @@
 
     <plugins>
         <plugin interceptor="com.young.coursera.core.mybatis.plugin.EntityAuditInterceptor"/>
-        <plugin interceptor="com.young.coursera.core.mybatis.plugin.SqlLogInterceptor"/>
+<!--        <plugin interceptor="com.young.coursera.core.mybatis.plugin.SqlLogInterceptor"/>-->
     </plugins>
 </configuration>

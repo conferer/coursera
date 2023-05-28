@@ -20,7 +20,7 @@ public class Generator {
 
     public static void main(String[] args) throws IOException {
 
-        initMybatisGeneratorConfig("city", "city");
+        initMybatisGeneratorConfig("shopping_00", "city");
 
     }
 

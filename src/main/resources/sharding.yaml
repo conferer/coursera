@@ -1,0 +1,44 @@
+mode:
+  type: Standalone
+  repository:
+    type: JDBC
+
+dataSources:
+  ds_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3308/db_sharding_01?serverTimezone=UTC&useSSL=false
+    username: sammy
+    password: root
+  ds_1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3308/db_sharding_02?serverTimezone=UTC&useSSL=false
+    username: sammy
+    password: root
+
+rules:
+  - !SHARDING
+    tables:
+      shopping:
+        actualDataNodes: ds_$->{0..1}.shopping_$->{0..1}
+        databaseStrategy:
+          standard:
+            shardingColumn: shoping_id
+            shardingAlgorithmName: database_inline
+        tableStrategy:
+          standard:
+            shardingColumn: shoping_id
+            shardingAlgorithmName: shopping_inline
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds_$->{shoping_id % 2}
+      shopping_inline:
+        type: INLINE
+        props:
+          algorithm-expression: shopping_$->{shoping_id % 2}
+
+props:
+  sql-show: true
