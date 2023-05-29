@@ -20,8 +20,8 @@ public class Generator {
 
     public static void main(String[] args) {
 
-        initMybatisGeneratorConfig("product_00", "city");
-        initMybatisGeneratorConfig("user_info", "city");
+        //initMybatisGeneratorConfig("order", "city");
+        initMybatisGeneratorConfig("order_item", "city");
 
     }
 

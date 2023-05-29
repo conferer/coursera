@@ -1,4 +1,4 @@
-package com.young.coursera.shopping;
+package com.young.coursera.service;
 
 import com.young.coursera.CourseraApplicationTests;
 import com.young.coursera.city.domain.model.Product;

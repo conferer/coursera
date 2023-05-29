@@ -22,10 +22,10 @@ rules:
     tables:
       product:
         actualDataNodes: ds_$->{0..1}.product_0$->{0..1}
-        databaseStrategy:
-          standard:
-            shardingColumn: id
-            shardingAlgorithmName: database_inline
+        #        databaseStrategy:
+        #          standard:
+        #            shardingColumn: id
+        #            shardingAlgorithmName: database_inline
         tableStrategy:
           standard:
             shardingColumn: id
@@ -37,6 +37,38 @@ rules:
         keyGenerateStrategy:
           column: id
           keyGeneratorName: snowflake_generator
+      order:
+        actualDataNodes: ds_${0..1}.order
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake_generator
+      #        databaseStrategy:
+      #          standard:
+      #            shardingColumn: id
+      #            shardingAlgorithmName: database_inline
+      order_item:
+        actualDataNodes: ds_${0..1}.order_item
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake_generator
+      #        databaseStrategy:
+      #          standard:
+      #            shardingColumn: id
+      #            shardingAlgorithmName: database_inline
+      user_info:
+        actualDataNodes: ds_${0..1}.user_info
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake_generator
+        #        databaseStrategy:
+        #          standard:
+        #            shardingColumn: id
+        #            shardingAlgorithmName: database_inline
+    defaultDatabaseStrategy:
+      standard:
+        shardingColumn: id
+        shardingAlgorithmName: key-int-mod
+
     shardingAlgorithms:
       database_inline:
         type: INLINE
@@ -50,8 +82,16 @@ rules:
         type: HASH_MOD
         props:
           sharding-count: 2
+      key-int-mod:
+        type: MOD
+        props:
+          sharding-count: 2
     keyGenerators:
       snowflake_generator:
         type: SNOWFLAKE
+    bindingTables:
+      - order, order_item
+    broadcastTables:
+      - user_info
 props:
   sql-show: true

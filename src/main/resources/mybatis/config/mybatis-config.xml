@@ -18,8 +18,8 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-    <plugins>
-        <plugin interceptor="com.young.coursera.core.mybatis.plugin.EntityAuditInterceptor"/>
+<!--    <plugins>-->
+<!--        <plugin interceptor="com.young.coursera.core.mybatis.plugin.EntityAuditInterceptor"/>-->
 <!--        <plugin interceptor="com.young.coursera.core.mybatis.plugin.SqlLogInterceptor"/>-->
-    </plugins>
+<!--    </plugins>-->
 </configuration>

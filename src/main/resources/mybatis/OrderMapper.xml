@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.young.coursera.city.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.young.coursera.city.domain.model.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from `order`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+<!--  <insert id="insert" parameterType="com.young.coursera.city.domain.model.Order">-->
+<!--    insert into order (id, price, user_id-->
+<!--      )-->
+<!--    values (#{id,jdbcType=BIGINT}, #{price,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}-->
+<!--      )-->
+<!--  </insert>-->
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.young.coursera.city.domain.model.Order">
+    INSERT INTO `order`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="price != null">price,</if>
+      <if test="userId != null">user_id,</if>
+    </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=BIGINT},</if>
+      <if test="price != null">#{price,jdbcType=INTEGER},</if>
+      <if test="userId != null">#{userId,jdbcType=BIGINT},</if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.young.coursera.city.domain.model.Order">
+    update `order`
+    set price = #{price,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, price, user_id
+    from `order`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select id, price, user_id
+    from `order`
+  </select>
+</mapper>

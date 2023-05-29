@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.young.coursera.city.mapper.OrderItemMapper">
+    <resultMap id="BaseResultMap" type="com.young.coursera.city.domain.model.OrderItem">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="product_price" jdbcType="INTEGER" property="productPrice"/>
+    </resultMap>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from order_item
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.young.coursera.city.domain.model.OrderItem">
+        insert into order_item ( order_id, product_name,
+        product_price)
+        values ( #{orderId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR},
+        #{productPrice,jdbcType=INTEGER})
+    </insert>
+    <update id="update" parameterType="com.young.coursera.city.domain.model.OrderItem">
+        update order_item
+        set order_id = #{orderId,jdbcType=BIGINT},
+        product_name = #{productName,jdbcType=VARCHAR},
+        product_price = #{productPrice,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, order_id, product_name, product_price
+        from order_item
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select id, order_id, product_name, product_price
+        from order_item
+    </select>
+</mapper>
