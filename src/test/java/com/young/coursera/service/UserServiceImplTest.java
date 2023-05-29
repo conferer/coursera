@@ -6,6 +6,7 @@ import com.young.coursera.city.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 public class UserServiceImplTest extends CourseraApplicationTests {
 
     @Autowired
@@ -19,5 +20,13 @@ public class UserServiceImplTest extends CourseraApplicationTests {
         userInfo.setName("allen");
         userInfo.setSex("男");
         userInfoService.insert(userInfo);
+    }
+
+    @Test
+    void update(){
+        UserInfo userInfo = userInfoService.findById(22L);
+        userInfo.setAge(25);
+        userInfo.setName("young");
+        int update = userInfoService.update(userInfo);
     }
 }
