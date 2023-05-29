@@ -20,25 +20,38 @@ dataSources:
 rules:
   - !SHARDING
     tables:
-      shopping:
-        actualDataNodes: ds_$->{0..1}.shopping_$->{0..1}
+      product:
+        actualDataNodes: ds_$->{0..1}.product_0$->{0..1}
         databaseStrategy:
           standard:
-            shardingColumn: shoping_id
+            shardingColumn: id
             shardingAlgorithmName: database_inline
         tableStrategy:
           standard:
-            shardingColumn: shoping_id
-            shardingAlgorithmName: shopping_inline
+            shardingColumn: id
+            shardingAlgorithmName: product_inline
+        #        tableStrategy:
+        #          standard:
+        #            shardingColumn: name
+        #            shardingAlgorithmName: key-hash-mod
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake_generator
     shardingAlgorithms:
       database_inline:
         type: INLINE
         props:
-          algorithm-expression: ds_$->{shoping_id % 2}
-      shopping_inline:
+          algorithm-expression: ds_$->{id % 2}
+      product_inline:
         type: INLINE
         props:
-          algorithm-expression: shopping_$->{shoping_id % 2}
-
+          algorithm-expression: product_0$->{id % 2}
+      key-hash-mod:
+        type: HASH_MOD
+        props:
+          sharding-count: 2
+    keyGenerators:
+      snowflake_generator:
+        type: SNOWFLAKE
 props:
   sql-show: true

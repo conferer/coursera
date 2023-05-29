@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.young.coursera.city.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.young.coursera.city.domain.model.UserInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+  </resultMap>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.young.coursera.city.domain.model.UserInfo">
+    insert into user_info (id, name, sex, 
+      age)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER})
+  </insert>
+  <update id="update" parameterType="com.young.coursera.city.domain.model.UserInfo">
+    update user_info
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, sex, age
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select id, name, sex, age
+    from user_info
+  </select>
+</mapper>

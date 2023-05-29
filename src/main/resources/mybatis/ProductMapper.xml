@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.young.coursera.city.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="com.young.coursera.city.domain.model.Product">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+    </resultMap>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from product
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.young.coursera.city.domain.model.Product">
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="price != null">price,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="price != null">#{price},</if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.young.coursera.city.domain.model.Product">
+        update product
+        set name = #{name,jdbcType=VARCHAR},
+        price = #{price,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, name, price
+        from product
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select id, name, price
+        from product
+    </select>
+</mapper>

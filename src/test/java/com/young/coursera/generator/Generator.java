@@ -18,9 +18,10 @@ import java.util.stream.Stream;
 public class Generator {
     public static final Logger log = LoggerFactory.getLogger(Generator.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        initMybatisGeneratorConfig("shopping_00", "city");
+        initMybatisGeneratorConfig("product_00", "city");
+        initMybatisGeneratorConfig("user_info", "city");
 
     }
 
